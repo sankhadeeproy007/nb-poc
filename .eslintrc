@@ -1,0 +1,10 @@
+{
+  "extends": ["react-native-wcandillon", "prettier", "prettier/react"],
+  "rules": {
+    "sort-keys": [
+      "error",
+      "asc",
+      { "caseSensitive": true, "natural": false, "minKeys": 2 }
+    ]
+  }
+}
