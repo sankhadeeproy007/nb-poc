@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import { colors as colorsType, derivedColorsType } from "../Types";
-import { ButtonProps } from "../components/Button";
+import { ButtonProps } from "../composites/Button";
 
 export const getColorFromProps = (
   props: ButtonProps,

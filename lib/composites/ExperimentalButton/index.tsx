@@ -43,16 +43,24 @@ const Button = (props: ButtonProps) => {
       borderColor: getColorFromProps(props, COLORS).borderColor,
       borderRadius: SPACING.SM / 2,
       borderWidth: 1,
+      elevation: 3,
       flexDirection: "row",
       justifyContent: "center",
       paddingHorizontal: SPACING.XLG,
-      paddingVertical: SPACING.SM
+      paddingVertical: SPACING.SM,
+      shadowColor: "#000",
+      shadowOffset: {
+        height: 1,
+        width: 0
+      },
+      shadowOpacity: 0.22,
+      shadowRadius: 2.22
     },
     iconStyle: {
-      marginRight:
-        props?.icon?.position === "left" && props.label ? SPACING.XXSM : 0,
       marginLeft:
-        props?.icon?.position === "right" && props.label ? SPACING.XXSM : 0
+        props?.icon?.position === "right" && props.label ? SPACING.XXSM : 0,
+      marginRight:
+        props?.icon?.position === "left" && props.label ? SPACING.XXSM : 0
     },
     labelStyle: {
       color: getColorFromProps(props, COLORS).color,

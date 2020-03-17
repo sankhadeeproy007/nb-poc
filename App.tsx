@@ -1,82 +1,53 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
+import { t } from "react-native-tailwindcss";
 
-import Button from "./lib/components/Button";
-import { ThemeProvider, useTheme } from "./lib/theme";
+// import Button from "./lib/components/Button";
 
-import theme from "./theme";
+import Button from "./lib/primitives/Button/index";
+import AppBar, { AppBarAction } from "./lib/composites/AppBar";
 
 export default function App() {
   const [clicked, setClicked] = useState(0);
-  const [defaultTheme, setDefaultTheme] = useState(true);
 
-  const currentTheme = useTheme();
-
-  const styles = StyleSheet.create({
-    container: {
-      alignItems: "center",
-      backgroundColor: currentTheme.COLORS.BACKGROUND,
-      flex: 1,
-      justifyContent: "center",
-      padding: 20
+  const actions: Array<AppBarAction> = [
+    {
+      iconName: "chat",
+      onPress: () =>
+        setClicked((prevClicked: number): number => prevClicked + 5)
+      // style: t.textRed600
     },
-    mt20: { marginTop: 20 },
-    textStyle: {
-      color: currentTheme.COLORS.ON_BACKGROUND,
-      fontSize: 26,
-      marginBottom: 20
+    {
+      iconName: "favorite",
+      onPress: () =>
+        setClicked((prevClicked: number): number => prevClicked * 1.5)
+    },
+    {
+      iconName: "loop",
+      onPress: () => setClicked(0)
     }
-  });
+  ];
 
   return (
-    <ThemeProvider {...(defaultTheme && { theme })}>
-      <View style={styles.container}>
-        <Text style={styles.textStyle}>{clicked}</Text>
+    <SafeAreaView style={[t.bgIndigo700, t.flex1]}>
+      <AppBar
+        leading={{
+          iconName: "menu",
+          onPress: () =>
+            setClicked((prevClicked: number): number => prevClicked - 1)
+        }}
+        title="Header"
+        actions={actions}
+      />
+      <View style={[t.itemsCenter, t.bgWhite, t.flex1, t.justifyCenter, t.p10]}>
+        <Text style={[t.textBlack, t.text3xl, t.mB2]}>{clicked}</Text>
         <Button
-          label="Primary Set Counter"
           onPress={() =>
             setClicked((prevClicked: number): number => prevClicked + 1)
           }
-        />
-        <Button
-          variant="error"
-          outline
-          buttonStyle={styles.mt20}
-          label="Error Button"
-        />
-        <Button
-          variant="secondary"
-          buttonStyle={styles.mt20}
-          label="Secondary Button"
-        />
-        <Button
-          transparent
-          buttonStyle={styles.mt20}
-          label="Transparent Button"
-        />
-        <Button
-          variant="error"
-          buttonStyle={styles.mt20}
-          expand
-          label="Error Expanded"
-        />
-        <Button
-          variant="secondary"
-          icon={{ name: "alarm", position: "left" }}
-          buttonStyle={styles.mt20}
-          label="Icon Button"
-        />
-        <Button
-          outline
-          icon={{ name: "all-inclusive", position: "right" }}
-          buttonStyle={styles.mt20}
-          label="Toggle theme"
-          expand
-          onPress={() =>
-            setDefaultTheme((prevTheme: boolean): boolean => !prevTheme)
-          }
+          label="Clickkk!"
         />
       </View>
-    </ThemeProvider>
+    </SafeAreaView>
   );
 }
